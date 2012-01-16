@@ -1,0 +1,12 @@
+(define (sort-list key pred lst)
+  (if (null? lst) lst
+      (let loop ((p (car lst))
+                 (t (cdr lst))
+                 (l '())
+                 (r '()))
+        (if (null? t)
+            (append (sort-list key pred l)
+                    (cons p (sort-list key pred r)))
+            (if (pred (key (car t)) (key p))
+                (loop p (cdr t) (cons (car t) l) r)
+                (loop p (cdr t) l (cons (car t) r)))))))
